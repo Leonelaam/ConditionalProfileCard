@@ -23,26 +23,78 @@ import "../style/index.scss";
     }
  */
 function render(variables = {}) {
-  console.log("These are the current variables: ", variables); //print on the console
+  console.log("These are the current variables: ", variables);
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
+
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
-  // reset the website body with the new html output
+  // Inputs de texto
+  let nombre = variables.name;
+  if (variables.name == null) {
+    nombre = " ";
+  }
+
+  let apellido = variables.lastname;
+  if (variables.lastname == null) {
+    apellido = " ";
+  }
+
+  let ciudad = variables.city;
+  if (variables.city == null) {
+    ciudad = " ";
+  }
+
+  let pais = variables.country;
+  if (variables.country == null) {
+    pais = " ";
+  }
+
+  let trabajo = variables.role;
+  if (variables.role == null) {
+    trabajo = " ";
+  }
+
+  let rdTwitter = variables.twitter;
+  if (variables.twitter == null) {
+    rdTwitter = " ";
+  }
+
+  let rdGitHub = variables.github;
+  if (variables.github == null) {
+    rdGitHub = " ";
+  }
+
+  let rdLinkedin = variables.linkedin;
+  if (variables.linkedin == null) {
+    rdLinkedin = " ";
+  }
+
+  let rdInstagram = variables.instagram;
+  if (variables.instagram == null) {
+    rdInstagram = " ";
+  }
+
+  // redes
+  let social = "";
+  if (variables.socialMediaPosition != null) {
+    social = `<ul class="${variables.socialMediaPosition}">
+            <li><a href=${rdTwitter}><i class="fa fa-twitter"></i></a></li>
+            <li><a href=${rdGitHub}><i class="fa fa-github"></i></a></li>
+            <li><a href=${rdLinkedin}><i class="fa fa-linkedin"></i></a></li>
+            <li><a href=${rdInstagram}><i class="fa fa-instagram"></i></a></li>
+          </ul>`;
+  }
+
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
-          <img src="${variables.avatarURL}" class="photo" />
-          <h1>${variables.name} ${variables.lastname}</h1>
-          <h2>${variables.role}</h2>
-          <h3>${variables.city}, ${variables.country}</h3>
-          <ul class="${variables.socialMediaPosition}">
-            <li><a href="${variables.twitterL}"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="${variables.github}"><i class="fa fa-github"></i></a></li>
-            <li><a href="${variables.linkedin}"><i class="fa fa-linkedin"></i></a></li>
-            <li><a href="${variables.instagram}"><i class="fa fa-instagram"></i></a></li>
-          </ul>
-        </div>`;
+          <img src="${variables.avatarURL}" class="photo"/>
+          <h1>${nombre} ${apellido}</h1>
+          <h2>${trabajo}</h2>
+           <h3>${ciudad}, ${pais}</h3>
+            ${social}
+          </div>`;
 }
 
 /**
